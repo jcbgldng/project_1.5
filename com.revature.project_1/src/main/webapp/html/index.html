@@ -6,11 +6,13 @@
 	</head>
 	<body>
 		<h1>Project 1 login Page</h1>
-		<form action="/project_1/log_in" method="post">
+		<form action="/com.revature.project_1/log_in" method="post">
 			Username<br>
   			<input type="text" name="username" placeholder="Enter your Username"><br>
   			Password<br>
-  			<input type="text" name="password" placeholder="Enter your Password"><br>
+  			<input type="password" name="password" placeholder="Enter your Password"><br>
+  			<input type="radio" name="type" value="manager" checked> Manager
+  			<input type="radio" name="type" value="employee"> Employee<br>
   			<input type ="submit" value="go">
 		</form>
 	</body>

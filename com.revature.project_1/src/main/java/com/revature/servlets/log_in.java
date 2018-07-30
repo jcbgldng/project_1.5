@@ -23,16 +23,18 @@ public class log_in extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-    	
-    	String username = request.getParameter("username");
-    	String password = request.getParameter("password");
-    	
-    	
-    }
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-    	doGet(req,resp);
+    	String username = req.getParameter("username");
+    	String password = req.getParameter("password");
+    	String[] type = req.getParameterValues("type");
+    	
+    	
+    	if(type[0].equals("manager"))
+    		resp.sendRedirect("http://localhost:8080/com.revature.project_1/html/manager.html");
+    	else
+    		resp.sendRedirect("https://www.google.com/");
     }
 
 }
