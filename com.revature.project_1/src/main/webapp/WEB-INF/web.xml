@@ -4,14 +4,15 @@
 
 <web-app>
   <display-name>Archetype Created Web Application</display-name>
+  
   <servlet>
-  	<servlet-name>log_in</servlet-name>
-  	<display-name>log_in</display-name>
-  	<description></description>
-  	<servlet-class>com.revature.servlets.log_in</servlet-class>
+  	<servlet-name>MasterServlet</servlet-name>
+  	<servlet-class>com.revature.servlets.MasterServlet</servlet-class>
   </servlet>
+  
   <servlet-mapping>
-  	<servlet-name>log_in</servlet-name>
-  	<url-pattern>/log_in</url-pattern>
+  	<servlet-name>MasterServlet</servlet-name>
+  	<url-pattern>*.do</url-pattern>
   </servlet-mapping>
+  
 </web-app>
