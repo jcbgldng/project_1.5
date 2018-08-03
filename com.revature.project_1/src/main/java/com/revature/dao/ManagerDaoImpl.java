@@ -3,6 +3,7 @@ package com.revature.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import com.revature.connection.Jdbcconnection;
 import com.revature.model.Manager;
@@ -21,9 +22,10 @@ public class ManagerDaoImpl implements ManagerDao{
 
 	@Override
 	public Manager getManager(String username, String password) {
+		Connection theConn = null;
 		try {
 			Manager possibleManager = null;
-			Connection theConn = Jdbcconnection.getConnection();
+			theConn = Jdbcconnection.getConnection();
 			
 			String sql = "select * from managers where username=?";
 			PreparedStatement ps = theConn.prepareStatement(sql);
@@ -50,6 +52,12 @@ public class ManagerDaoImpl implements ManagerDao{
 				return possibleManager;
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				theConn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}
