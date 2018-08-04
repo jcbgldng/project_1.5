@@ -23,7 +23,10 @@
 		</nav>
 		<button id="theName">boop</button>
 		<button id="viewEmployees">View Employees</button>
-		<h1 id="spot">Hello</h1>
+		<form id="EmployeeLogout" action="logOut.do" method="post">
+      		<button type="submit">Log Out</button>
+    	</form>
+		<div id="spot">Hello</div>
 		
 		<script type="text/javascript" src="../js/managerAjax.js"></script>
 	</body>

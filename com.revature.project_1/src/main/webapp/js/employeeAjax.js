@@ -1,6 +1,20 @@
 window.onload = function(){
+	loggedIn();
 	document.getElementById("ViewInformation").addEventListener("click", viewInformation);
 	document.getElementById("GetChangeInformationForm").addEventListener("click", GetChangeInformationForm);
+}
+
+function loggedIn(){
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if( (xhr.status === 404) ){
+			window.location.href = "http://localhost:8080/com.revature.project_1/html/index.html";
+		}
+		
+	}
+	xhr.open("post", "/com.revature.project_1/Employee.do", true);
+	xhr.send();
+	
 }
 
 function viewInformation(){

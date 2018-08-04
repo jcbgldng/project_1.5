@@ -1,6 +1,20 @@
 window.onload = function(){
+	loggedIn();
 	document.getElementById("theName").addEventListener("click", printFirstandLast);
 	document.getElementById("viewEmployees").addEventListener("click", viewEmployees);
+}
+
+function loggedIn(){
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if( (xhr.status === 404) ){
+			window.location.href = "http://localhost:8080/com.revature.project_1/html/index.html";
+		}
+		
+	}
+	xhr.open("post", "/com.revature.project_1/Manager.do", true);
+	xhr.send();
+	
 }
 
 function printFirstandLast(){

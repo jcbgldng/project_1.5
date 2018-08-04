@@ -22,12 +22,20 @@ public class MasterServlet extends HttpServlet {
     }
     @Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    	req.getRequestDispatcher(RequestHelper.process(req)).forward(req, resp);
+    	try {
+    		req.getRequestDispatcher(RequestHelper.process(req)).forward(req, resp);
+		} catch (Exception e) {
+			//Employee or manager logged in fine
+		} 
 	}
     
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
-    	req.getRequestDispatcher(RequestHelper.process(req)).forward(req,resp);
+    	try {
+    		req.getRequestDispatcher(RequestHelper.process(req)).forward(req,resp);
+		} catch (Exception e) {
+			// Employee or manager logged in fine
+		} 
     }
 
 }

@@ -73,5 +73,30 @@ public class LoginHandler {
     		return "/html/index.html";
 	}
 
+	public static String logout(HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
+		session.invalidate();
+		
+		return "/html/index.html";
+	}
+
+	public static String employeeLoggedIn(HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
+		String t1 = (String) session.getAttribute("employeeFirstname");
+		if(t1 == null) {
+			return "404.jsp";
+		}
+		return null;
+	}
+
+	public static String managerLoggedIn(HttpServletRequest req) {
+		HttpSession session = req.getSession(false);
+		String t1 = (String) session.getAttribute("managerFirstname");
+		if(t1 == null) {
+			return "404.jsp";
+		}
+		return null;
+	}
+
 
 }

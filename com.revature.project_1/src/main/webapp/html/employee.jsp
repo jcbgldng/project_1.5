@@ -10,6 +10,9 @@
 		<p>Place holder</p>
 		<button id="ViewInformation">View Information</button>
     <button id="GetChangeInformationForm">Change Information</button>
+    <form id="EmployeeLogout" action="logOut.do" method="post">
+      <button type="submit">Log Out</button>
+    </form>
 		<div id="EmployeePage">
       <p>This should change</p>
     </div>
