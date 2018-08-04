@@ -3,6 +3,9 @@ package com.revature.handler;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.revature.model.Employee;
 import com.revature.service.EmployeeService;
 
@@ -23,6 +26,20 @@ public class EmployeeHandler {
 		returnHtml = returnHtml + "</tbody></table>";
 		return returnHtml;
 	}
+
+	public static String getEmployeeInformation(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		String returnHtml = "<table><thead><th>First Name</th><th>Last Name</th><th>Address</th><th>Phone</th><th>Email</th></thead><tbody>";
+		returnHtml = returnHtml + "<tr><td>"+ session.getAttribute("employeeFirstname") +"</td>";
+		returnHtml = returnHtml + "<td>"+ session.getAttribute("employeeLastname") +"</td>";
+		returnHtml = returnHtml + "<td>"+ session.getAttribute("employeeAddress") +"</td>";
+		returnHtml = returnHtml + "<td>"+ session.getAttribute("employeePhone") +"</td>";
+		returnHtml = returnHtml + "<td>"+ session.getAttribute("employeeEmail") +"</td></tr>";
+		returnHtml = returnHtml + "</tbody></table>";
+
+		return returnHtml;
+	}
+	
 
 }
  

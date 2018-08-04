@@ -38,6 +38,9 @@ public class LoginHandler {
             newSession.setAttribute("employeeid", theEmployee.getEmployee_id());
             newSession.setAttribute("employeeFirstname", theEmployee.getFirstName());
             newSession.setAttribute("employeeLastname", theEmployee.getLastName());
+            newSession.setAttribute("employeeAddress", theEmployee.getAddress());
+            newSession.setAttribute("employeePhone", theEmployee.getPhoneNumber());
+            newSession.setAttribute("employeeEmail", theEmployee.getEmail());
     		
     		return "/html/employee.jsp";
     	}
@@ -60,6 +63,9 @@ public class LoginHandler {
             newSession.setAttribute("managerid", theManager.getUser_id());
             newSession.setAttribute("managerFirstname", theManager.getFirstName());
             newSession.setAttribute("managerLastname", theManager.getLastName());
+            newSession.setAttribute("managerAddress", theManager.getAddress());
+            newSession.setAttribute("managerPhone", theManager.getPhoneNumber());
+            newSession.setAttribute("managerEmail", theManager.getEmail());
     		
     		return "/html/manager.jsp";
     	}

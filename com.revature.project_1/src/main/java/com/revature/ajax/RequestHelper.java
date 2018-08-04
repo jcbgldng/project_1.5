@@ -14,6 +14,8 @@ public class RequestHelper {
 			return FirstNameHandler.getFirstName(req);
 		case "/com.revature.project_1/viewEmployees.ajax":
 			return EmployeeHandler.getEmployees();
+		case "/com.revature.project_1/ViewEmployeeInformation.ajax":
+			return EmployeeHandler.getEmployeeInformation(req);
 		default :
 			return " ";
 		}
