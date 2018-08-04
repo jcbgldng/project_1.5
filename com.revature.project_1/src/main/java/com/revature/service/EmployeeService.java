@@ -28,4 +28,9 @@ public class EmployeeService {
 		return EmployeeDaoImpl.getEmployeeDao().getEmployees();
 	}
 
+	public Employee updateEmployee(int employee_id, String firstName, String lastName, String address, String phone,
+			String email) {
+		return EmployeeDaoImpl.getEmployeeDao().updateEmployee(employee_id, firstName, lastName, address, phone, email);
+	}
+
 }

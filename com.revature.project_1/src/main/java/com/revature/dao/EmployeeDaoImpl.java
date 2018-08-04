@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,7 +37,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			
 			ps.setString(1, username);
 			
-			System.out.println(ps);
 			ResultSet rs = ps.executeQuery();
 			
 			
@@ -68,8 +68,9 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 	@Override
 	public List<Employee> getEmployees() {
+		Connection conn = null;
 		try {
-			Connection conn = Jdbcconnection.getConnection();
+			conn = Jdbcconnection.getConnection();
 			String sql = "SELECT * FROM employees";
 			
 			PreparedStatement ps;
@@ -94,7 +95,63 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 			
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+
+	public Employee updateEmployee(int employee_id, String firstName, String lastName, String address, String phone,
+			String email) {
+		Connection theConn = null;
+		try {
+			Employee possibleEmployee = null;
+			theConn = Jdbcconnection.getConnection();
+			
+			String sql = "call update_employee(?,?,?,?,?,?)";
+			CallableStatement cs = theConn.prepareCall(sql);
+			
+			cs.setInt(1, employee_id);
+			cs.setString(2, firstName);
+			cs.setString(3, lastName);
+			cs.setString(4, address);
+			cs.setString(5, phone);
+			cs.setString(6, email);
+			cs.executeUpdate();
+			
+			sql = "SELECT * FROM employees where employee_id=?";
+			
+			PreparedStatement ps;
+			ps = theConn.prepareStatement(sql);
+			ps.setInt(1, employee_id);
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				possibleEmployee = new Employee(
+						rs.getInt("employee_id"), 
+						rs.getString("username"), 
+						rs.getString("thePassword"), 
+						rs.getString("first_name"), 
+						rs.getString("last_name"), 
+						rs.getString("address"), 
+						rs.getString("phone_number"), 
+						rs.getString("email")
+						);
+			}
+			return possibleEmployee;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				theConn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		return null;
 	}

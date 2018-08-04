@@ -8,7 +8,8 @@
 </head>
 	<body>
 		<p>Place holder</p>
-		<button id="ViewInformation">boop</button>
+		<button id="ViewInformation">View Information</button>
+    <button id="GetChangeInformationForm">Change Information</button>
 		<div id="EmployeePage">
       <p>This should change</p>
     </div>
