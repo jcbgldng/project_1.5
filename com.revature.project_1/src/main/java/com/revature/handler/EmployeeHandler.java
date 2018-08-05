@@ -1,7 +1,8 @@
 package com.revature.handler;
 
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Enumeration;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import com.revature.model.Employee;
 import com.revature.service.EmployeeService;
+import com.revature.service.RIMRService;
 
 public class EmployeeHandler {
 
@@ -70,10 +72,10 @@ public class EmployeeHandler {
 		HttpSession session = req.getSession();
 		int employee_id = (int) session.getAttribute("employeeid");
 		String firstName = req.getParameter("FirstName");
-    		String lastName = req.getParameter("LastName");
-    		String address = req.getParameter("Address");
-    		String phone = req.getParameter("Phone");
-    		String email = req.getParameter("Email");
+		String lastName = req.getParameter("LastName");
+		String address = req.getParameter("Address");
+		String phone = req.getParameter("Phone");
+		String email = req.getParameter("Email");
     	
 
 		Employee theEmployee = null;
@@ -88,6 +90,23 @@ public class EmployeeHandler {
 		session.setAttribute("employeeEmail", theEmployee.getEmail());
 		
 		return getEmployeeInformation(req);
+	}
+
+	public static String GetRIMRForm(HttpServletRequest req) {
+		String returnHtml = "<form id=\"RIMRForm\" action=\"javascript:void(0);\" onsubmit=\"createRIMRForm()\">";
+		returnHtml = returnHtml + "Enter the Amount you wish to be Reimbursed <br><input type=\"number\" name=\"Amount\"><br>";
+		returnHtml = returnHtml + "<input type =\"submit\" value=\"go\"></form>";		
+		return returnHtml;
+	}
+
+	public static String CreateRimR(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		int employee_id = (int) session.getAttribute("employeeid");
+		int amount = Integer.parseInt(req.getParameter("Amount"));
+		Date date_submitted = new Date(Calendar.getInstance().getTime().getTime());
+		
+		RIMRService.getRIMRService().addRIMR(amount, date_submitted, employee_id);
+		return null;
 	}
 	
 

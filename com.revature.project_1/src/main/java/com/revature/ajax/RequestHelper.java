@@ -19,6 +19,10 @@ public class RequestHelper {
 			return EmployeeHandler.GetChangeForm(req);
 		case "/com.revature.project_1/UpdateEmployeeInformation.ajax":
 			return EmployeeHandler.UpdateEmployeeInformation(req);
+		case "/com.revature.project_1/GetRIMRForm.ajax":
+			return EmployeeHandler.GetRIMRForm(req);
+		case "/com.revature.project_1/CreateRimR.ajax":
+			return EmployeeHandler.CreateRimR(req);
 		default :
 			return " ";
 		}
