@@ -136,6 +136,43 @@ public class RIMRDaoImpl implements RIMRDao{
 		return null;
 	}
 
+	public List<RIMR> viewAllPendingRIMR() {
+		Connection conn = null;
+		try {
+			conn = Jdbcconnection.getConnection();
+			String sql = "select r.reimbursementrequest_id, e.first_name, e.last_name, r.amount, r.date_submitted, r.status from ReimbursementRequest r inner join employees e on r.employee_id = e.employee_id where r.status = 'Pending'";
+			
+			PreparedStatement ps;
+			ps = conn.prepareStatement(sql);
+			ResultSet rs = ps.executeQuery();
+			
+			List<RIMR> requests = new ArrayList<RIMR>();
+			
+			while(rs.next()) {
+				requests.add(new RIMR(
+						rs.getInt("reimbursementrequest_id"),
+						rs.getString("first_name"),
+						rs.getString("last_name"),
+						rs.getInt("amount"),
+						rs.getDate("date_submitted"),
+						rs.getString("status"),
+						null,
+						null,
+						null
+						));
+			}
+			return requests;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 
 	
 

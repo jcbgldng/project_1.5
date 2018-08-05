@@ -107,10 +107,10 @@ public class EmployeeHandler {
 		Date date_submitted = new Date(Calendar.getInstance().getTime().getTime());
 		
 		RIMRService.getRIMRService().addRIMR(amount, date_submitted, employee_id);
-		return ViewAllPendingRequests(req);
+		return ViewPendingRequests(req);
 	}
 
-	public static String ViewAllPendingRequests(HttpServletRequest req) {
+	public static String ViewPendingRequests(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		int employee_id = (int) session.getAttribute("employeeid");
 		List<RIMR> requests = new ArrayList<RIMR>();
@@ -130,7 +130,7 @@ public class EmployeeHandler {
 		return returnHtml;
 	}
 
-	public static String ViewAllResolvedRIMR(HttpServletRequest req) {
+	public static String ViewResolvedRIMR(HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		int employee_id = (int) session.getAttribute("employeeid");
 		List<RIMR> requests = new ArrayList<RIMR>();
@@ -145,6 +145,24 @@ public class EmployeeHandler {
 			returnHtml = returnHtml + "<td>"+ rimr.getStatus() +"</td>";
 			returnHtml = returnHtml + "<td>"+ rimr.getManagerFirstName() + " " + rimr.getManagerLastName() +"</td>";
 			returnHtml = returnHtml + "<td>"+ rimr.getDate_resolved() +"</td></tr>";
+			
+		}
+		returnHtml = returnHtml + "</tbody></table>";
+		
+		return returnHtml;
+	}
+
+	public static String ViewAllPendingRIMR(HttpServletRequest req) {
+		List<RIMR> requests = new ArrayList<RIMR>();
+		requests = RIMRService.getRIMRService().viewAllPendingRIMR();
+		
+		String returnHtml = "<table><thead><th>Request ID</th><th>Employee Name</th><th>Amount</th><th>Date Submitted</th></thead><tbody>";
+		
+		for (RIMR rimr : requests) {
+			returnHtml = returnHtml + "<tr><td>"+ rimr.getReimbursementrequest_id() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getEmployeeFrirstName() + " " + rimr.getEmployeeLastName() +"</td>";
+			returnHtml = returnHtml + "<td>$ "+ rimr.getAmount() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getDate_submitted() +"</td></tr>";
 			
 		}
 		returnHtml = returnHtml + "</tbody></table>";

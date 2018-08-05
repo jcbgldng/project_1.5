@@ -39,4 +39,8 @@ public class RIMRService {
 		return RIMRDaoImpl.getRIMRDAO().viewResolvedRequests(employee_id);
 	}
 
+	public List<RIMR> viewAllPendingRIMR() {
+		return RIMRDaoImpl.getRIMRDAO().viewAllPendingRIMR();
+	}
+
 }

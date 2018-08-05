@@ -12,4 +12,5 @@ public interface RIMRDao {
 	public List<RIMR> viewRequests(HttpServletRequest req);
 	public List<RIMR> viewPendingRequests(int employee_id);
 	public List<RIMR> viewResolvedRequests(int employee_id);
+	public List<RIMR> viewAllPendingRIMR();
 }
