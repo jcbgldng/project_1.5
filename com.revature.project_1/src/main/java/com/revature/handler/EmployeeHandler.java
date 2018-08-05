@@ -107,7 +107,7 @@ public class EmployeeHandler {
 		Date date_submitted = new Date(Calendar.getInstance().getTime().getTime());
 		
 		RIMRService.getRIMRService().addRIMR(amount, date_submitted, employee_id);
-		return null;
+		return ViewAllPendingRequests(req);
 	}
 
 	public static String ViewAllPendingRequests(HttpServletRequest req) {
@@ -116,10 +116,11 @@ public class EmployeeHandler {
 		List<RIMR> requests = new ArrayList<RIMR>();
 		requests = RIMRService.getRIMRService().viewPendingRequests(employee_id);
 		
-		String returnHtml = "<table><thead><th>Request ID</th><th>Date Submitted</th><th>Status</th></thead><tbody>";
+		String returnHtml = "<table><thead><th>Request ID</th><th>Amount</th><th>Date Submitted</th><th>Status</th></thead><tbody>";
 		
 		for (RIMR rimr : requests) {
 			returnHtml = returnHtml + "<tr><td>"+ rimr.getReimbursementrequest_id() +"</td>";
+			returnHtml = returnHtml + "<td>$ "+ rimr.getAmount() +"</td>";
 			returnHtml = returnHtml + "<td>"+ rimr.getDate_submitted() +"</td>";
 			returnHtml = returnHtml + "<td>"+ rimr.getStatus() +"</td></tr>";
 			
@@ -135,10 +136,11 @@ public class EmployeeHandler {
 		List<RIMR> requests = new ArrayList<RIMR>();
 		requests = RIMRService.getRIMRService().viewResolvedRequests(employee_id);
 		
-		String returnHtml = "<table><thead><th>Request ID</th><th>Date Submitted</th><th>Status</th><th>Manager Name</th><th>Date Resolved</th></thead><tbody>";
+		String returnHtml = "<table><thead><th>Request ID</th><th>Amount</th><th>Date Submitted</th><th>Status</th><th>Manager Name</th><th>Date Resolved</th></thead><tbody>";
 		
 		for (RIMR rimr : requests) {
 			returnHtml = returnHtml + "<tr><td>"+ rimr.getReimbursementrequest_id() +"</td>";
+			returnHtml = returnHtml + "<td>$ "+ rimr.getAmount() +"</td>";
 			returnHtml = returnHtml + "<td>"+ rimr.getDate_submitted() +"</td>";
 			returnHtml = returnHtml + "<td>"+ rimr.getStatus() +"</td>";
 			returnHtml = returnHtml + "<td>"+ rimr.getManagerFirstName() + " " + rimr.getManagerLastName() +"</td>";
