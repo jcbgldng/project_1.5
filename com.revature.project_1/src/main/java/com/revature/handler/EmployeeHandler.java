@@ -19,13 +19,15 @@ public class EmployeeHandler {
 		List<Employee> employeeList =  new ArrayList<Employee>();
 		employeeList = EmployeeService.getEmployeeService().getEmployees();
 		String returnHtml = "<table><thead><th>Employee ID</th><th>First Name</th><th>Last Name</th></thead><tbody>";
-		
+		int i = 1;
 		for (Employee employee : employeeList) {
 			returnHtml = returnHtml + "<tr>";
-			returnHtml = returnHtml + "<td>" + employee.getEmployee_id() + "</td>";
+			returnHtml = returnHtml + "<td id=\"em"+i+"\">" + employee.getEmployee_id() + "</td>";
 			returnHtml = returnHtml + "<td>" + employee.getFirstName() + "</td>";
 			returnHtml = returnHtml + "<td>" + employee.getLastName() + "</td>";
+			returnHtml = returnHtml + "<td>" + "<button onclick=\"GetAllEmployeeRequests(em"+i+")\">View all Employee's request</button>" + "</td>";
 			returnHtml = returnHtml + "</tr>";
+			i++;
 		}
 		returnHtml = returnHtml + "</tbody></table>";
 		return returnHtml;
@@ -200,6 +202,27 @@ public class EmployeeHandler {
 		int manager_id = (int) session.getAttribute("managerid");
 		RIMRService.getRIMRService().ResolveRIMR(rimr_id, decision, date_resolved, manager_id );
 		return ViewAllResolvedRIMR(req);
+	}
+
+	public static String GetAllEmployeeRequests(HttpServletRequest req) {
+		int em_id = Integer.parseInt(req.getParameter("em_id"));
+		List<RIMR> requests = new ArrayList<RIMR>();
+		requests = RIMRService.getRIMRService().viewAllPendingRIMRofEmployee(em_id);
+		
+		String returnHtml = "<table><thead><th>Request ID</th><th>Employee Name</th><th>Amount</th><th>Date Submitted</th></thead><tbody>";
+		int i = 1;
+		for (RIMR rimr : requests) {
+			returnHtml = returnHtml + "<tr><td id=\"rimr"+i+"\">"+ rimr.getReimbursementrequest_id() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getEmployeeFrirstName() + " " + rimr.getEmployeeLastName() +"</td>";
+			returnHtml = returnHtml + "<td>$ "+ rimr.getAmount() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getDate_submitted() +"</td>";
+			returnHtml = returnHtml + "<td>"+ "<button onclick=\"AppoveRIMR(rimr"+i+")\">Approve</button><button onclick=\"RejectRIMR(rimr"+i+")\">Reject</button>" + "</td></tr>";
+			i++;
+			
+		}
+		returnHtml = returnHtml + "</tbody></table>";
+		
+		return returnHtml;
 	}
 
 	

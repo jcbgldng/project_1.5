@@ -52,4 +52,8 @@ public class RIMRService {
 		
 	}
 
+	public List<RIMR> viewAllPendingRIMRofEmployee(int em_id) {
+		return RIMRDaoImpl.getRIMRDAO().viewAllPendingRIMRofEmployee(em_id);
+	}
+
 }

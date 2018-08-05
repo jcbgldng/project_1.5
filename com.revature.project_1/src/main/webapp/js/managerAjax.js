@@ -113,3 +113,20 @@ function RejectRIMR(id) {
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	xhr.send(data);
 }
+function GetAllEmployeeRequests(id) {
+	let spot = document.getElementById("spot");
+	let data = "";
+	data = data.concat("em_id=").concat(id.innerHTML);
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(){
+		if( (xhr.readyState === 4) & (xhr.status === 200) ){
+			spot.innerHTML = xhr.responseText;
+		}
+
+	}
+	xhr.open("post", "/com.revature.project_1/GetAllEmployeeRequests.ajax", true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.send(data);
+}

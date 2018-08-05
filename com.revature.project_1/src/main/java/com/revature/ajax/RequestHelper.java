@@ -35,6 +35,8 @@ public class RequestHelper {
 			return EmployeeHandler.ResolveRIMR(req, "Approved");
 		case "/com.revature.project_1/rejectRIMR.ajax":
 			return EmployeeHandler.ResolveRIMR(req, "Rejected");
+		case "/com.revature.project_1/GetAllEmployeeRequests.ajax":
+			return EmployeeHandler.GetAllEmployeeRequests(req);
 		default :
 			return " ";
 		}
