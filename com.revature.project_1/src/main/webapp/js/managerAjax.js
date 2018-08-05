@@ -3,6 +3,7 @@ window.onload = function(){
 	document.getElementById("theName").addEventListener("click", printFirstandLast);
 	document.getElementById("viewEmployees").addEventListener("click", viewEmployees);
 	document.getElementById("AllPendingRIMR").addEventListener("click", getAllPendingRIMR);
+	document.getElementById("AllResolvedRIMR").addEventListener("click", getAllResolvedRIMR);
 }
 
 function loggedIn(){
@@ -61,5 +62,20 @@ function getAllPendingRIMR() {
 
 	}
 	xhr.open("get", "/com.revature.project_1/getAllPendingRIMR.ajax");
+	xhr.send();
+}
+
+function getAllResolvedRIMR() {
+	let spot = document.getElementById("spot");
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(){
+		if( (xhr.readyState === 4) & (xhr.status === 200) ){
+			spot.innerHTML = xhr.responseText;
+		}
+
+	}
+	xhr.open("get", "/com.revature.project_1/getAllResolvedRIMR.ajax");
 	xhr.send();
 }

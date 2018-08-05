@@ -31,8 +31,7 @@ public class ManagerDaoImpl implements ManagerDao{
 			PreparedStatement ps = theConn.prepareStatement(sql);
 			
 			ps.setString(1, username);
-			
-			System.out.println(ps);
+		
 			ResultSet rs = ps.executeQuery();
 			
 			

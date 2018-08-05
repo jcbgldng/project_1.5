@@ -169,6 +169,27 @@ public class EmployeeHandler {
 		
 		return returnHtml;
 	}
+
+	public static String ViewAllResolvedRIMR(HttpServletRequest req) {
+		List<RIMR> requests = new ArrayList<RIMR>();
+		requests = RIMRService.getRIMRService().viewAllResolvedRIMR();
+		
+		String returnHtml = "<table><thead><th>Request ID</th><th>Employee Name</th><th>Amount</th><th>Date Submitted</th><th>Status</th><th>Manager Name</th><th>Date Resolved</th></thead><tbody>";
+		
+		for (RIMR rimr : requests) {
+			returnHtml = returnHtml + "<tr><td>"+ rimr.getReimbursementrequest_id() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getEmployeeFrirstName() + " " + rimr.getEmployeeLastName() +"</td>";
+			returnHtml = returnHtml + "<td>$ "+ rimr.getAmount() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getDate_submitted() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getStatus() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getManagerFirstName() + " " + rimr.getManagerLastName() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getDate_resolved() +"</td></tr>";
+			
+		}
+		returnHtml = returnHtml + "</tbody></table>";
+		
+		return returnHtml;
+	}
 	
 
 }

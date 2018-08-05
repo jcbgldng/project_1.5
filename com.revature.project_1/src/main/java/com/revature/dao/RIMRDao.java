@@ -13,4 +13,5 @@ public interface RIMRDao {
 	public List<RIMR> viewPendingRequests(int employee_id);
 	public List<RIMR> viewResolvedRequests(int employee_id);
 	public List<RIMR> viewAllPendingRIMR();
+	public List<RIMR> viewAllResolvedRIMR();
 }

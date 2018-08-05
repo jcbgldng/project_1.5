@@ -24,6 +24,7 @@
 		<button id="theName">boop</button>
 		<button id="viewEmployees">View Employees</button>
     <button id="AllPendingRIMR"> View all Pending Request</button>
+    <button id="AllResolvedRIMR"> View all Resolved Request</button>
 		<form id="EmployeeLogout" action="logOut.do" method="post">
       		<button type="submit">Log Out</button>
     	</form>
