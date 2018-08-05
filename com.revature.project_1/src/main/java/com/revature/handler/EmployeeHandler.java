@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.revature.model.Employee;
+import com.revature.model.RIMR;
 import com.revature.service.EmployeeService;
 import com.revature.service.RIMRService;
 
@@ -107,6 +108,25 @@ public class EmployeeHandler {
 		
 		RIMRService.getRIMRService().addRIMR(amount, date_submitted, employee_id);
 		return null;
+	}
+
+	public static String ViewAllPendingRequests(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		int employee_id = (int) session.getAttribute("employeeid");
+		List<RIMR> requests = new ArrayList<RIMR>();
+		requests = RIMRService.getRIMRService().viewPendingRequests(employee_id);
+		
+		String returnHtml = "<table><thead><th>Request ID</th><th>Date Submitted</th><th>Status</th></thead><tbody>";
+		
+		for (RIMR rimr : requests) {
+			returnHtml = returnHtml + "<tr><td>"+ rimr.getReimbursementrequest_id() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getDate_submitted() +"</td>";
+			returnHtml = returnHtml + "<td>"+ rimr.getStatus() +"</td></tr>";
+			
+		}
+		returnHtml = returnHtml + "</tbody></table>";
+		
+		return returnHtml;
 	}
 	
 

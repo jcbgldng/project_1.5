@@ -1,8 +1,12 @@
 package com.revature.service;
 
 import java.sql.Date;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import com.revature.dao.RIMRDaoImpl;
+import com.revature.model.RIMR;
 
 public class RIMRService {
 	
@@ -21,6 +25,14 @@ public class RIMRService {
 	public void addRIMR(int amount, Date date_submitted, int employee_id) {
 		RIMRDaoImpl.getRIMRDAO().addRIMR(amount, date_submitted, employee_id);
 		
+	}
+
+	public List<RIMR> viewRequests(HttpServletRequest req) {
+		return RIMRDaoImpl.getRIMRDAO().viewRequests(req);
+	}
+
+	public List<RIMR> viewPendingRequests(int employee_id) {
+		return RIMRDaoImpl.getRIMRDAO().viewPendingRequests(employee_id);
 	}
 
 }
