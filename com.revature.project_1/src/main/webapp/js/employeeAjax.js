@@ -4,6 +4,7 @@ window.onload = function(){
 	document.getElementById("GetChangeInformationForm").addEventListener("click", GetChangeInformationForm);
 	document.getElementById("GetRimForm").addEventListener("click", getRIMRForm);
 	document.getElementById("PendingRIMR").addEventListener("click", getPendingRIMR);
+	document.getElementById("ResolvedRIMR").addEventListener("click", getResolvedRIMR);
 }
 
 function loggedIn(){
@@ -120,4 +121,18 @@ function createRIMRForm() {
 	xhr.open("post", "/com.revature.project_1/CreateRimR.ajax", true);
 	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	xhr.send(data);
+}
+function getResolvedRIMR() {
+	let spot = document.getElementById("EmployeePage");
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(){
+		if( (xhr.readyState === 4) & (xhr.status === 200) ){
+			spot.innerHTML = xhr.responseText;
+		}
+
+	}
+	xhr.open("get", "/com.revature.project_1/ResolvedRIMR.ajax");
+	xhr.send();
 }

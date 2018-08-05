@@ -25,6 +25,8 @@ public class RequestHelper {
 			return EmployeeHandler.CreateRimR(req);
 		case "/com.revature.project_1/PendingRIMR.ajax":
 			return EmployeeHandler.ViewAllPendingRequests(req);
+		case "/com.revature.project_1/ResolvedRIMR.ajax":
+			return EmployeeHandler.ViewAllResolvedRIMR(req);
 		default :
 			return " ";
 		}

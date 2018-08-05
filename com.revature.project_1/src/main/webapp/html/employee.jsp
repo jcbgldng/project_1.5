@@ -16,6 +16,7 @@
     	<button id="GetChangeInformationForm">Change Information</button>
     	<button id="GetRimForm">Create RIMR</button>
       <button id="PendingRIMR">Pending Requests</button>
+      <button id="ResolvedRIMR">Resolved Requests</button>
 		<div id="EmployeePage">
       		<p>This should change</p>
     	</div>

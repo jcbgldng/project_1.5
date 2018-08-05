@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -90,11 +91,51 @@ public class RIMRDaoImpl implements RIMRDao{
 		return null;
 		
 	}
+	
+	public List<RIMR> viewResolvedRequests(int employee_id) {
+		Connection conn = null;
+		try {
+			conn = Jdbcconnection.getConnection();
+			String sql = "select r.reimbursementrequest_id, e.first_name as efirst_name, e.last_name as elast_name, r.amount, r.date_submitted, r.status, m.first_name as mfirst_name, m.last_name as mlast_name, r.date_resolved from ReimbursementRequest r inner join employees e on r.employee_id = e.employee_id inner join managers m on r.manager_id = m.manager_id where r.status != 'Pending' and e.employee_id=?" + 
+					"";
+			PreparedStatement ps;
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, employee_id);
+			ResultSet rs = ps.executeQuery();
+			
+			List<RIMR> requests = new ArrayList<RIMR>();
+			
+			while(rs.next()) {
+				
+				requests.add(new RIMR(
+						rs.getInt("reimbursementrequest_id"),
+						rs.getString("efirst_name"),
+						rs.getString("elast_name"),
+						rs.getInt("amount"),
+						rs.getDate("date_submitted"),
+						rs.getString("status"),
+						rs.getString("mfirst_name"),
+						rs.getString("mlast_name"),
+						rs.getDate("date_resolved")
+						));
+			}
+			return requests;
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}try {
+			conn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	public List<RIMR> viewRequests(HttpServletRequest req) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 	
 
