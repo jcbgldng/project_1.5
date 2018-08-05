@@ -157,12 +157,14 @@ public class EmployeeHandler {
 		requests = RIMRService.getRIMRService().viewAllPendingRIMR();
 		
 		String returnHtml = "<table><thead><th>Request ID</th><th>Employee Name</th><th>Amount</th><th>Date Submitted</th></thead><tbody>";
-		
+		int i = 1;
 		for (RIMR rimr : requests) {
-			returnHtml = returnHtml + "<tr><td>"+ rimr.getReimbursementrequest_id() +"</td>";
+			returnHtml = returnHtml + "<tr><td id=\"rimr"+i+"\">"+ rimr.getReimbursementrequest_id() +"</td>";
 			returnHtml = returnHtml + "<td>"+ rimr.getEmployeeFrirstName() + " " + rimr.getEmployeeLastName() +"</td>";
 			returnHtml = returnHtml + "<td>$ "+ rimr.getAmount() +"</td>";
-			returnHtml = returnHtml + "<td>"+ rimr.getDate_submitted() +"</td></tr>";
+			returnHtml = returnHtml + "<td>"+ rimr.getDate_submitted() +"</td>";
+			returnHtml = returnHtml + "<td>"+ "<button onclick=\"AppoveRIMR(rimr"+i+")\">Approve</button><button onclick=\"RejectRIMR(rimr"+i+")\">Reject</button>" + "</td></tr>";
+			i++;
 			
 		}
 		returnHtml = returnHtml + "</tbody></table>";
@@ -190,6 +192,16 @@ public class EmployeeHandler {
 		
 		return returnHtml;
 	}
+
+	public static String ResolveRIMR(HttpServletRequest req, String decision) {
+		HttpSession session = req.getSession();
+		int rimr_id = Integer.parseInt(req.getParameter("RIMR_id"));
+		Date date_resolved = new Date(Calendar.getInstance().getTime().getTime());
+		int manager_id = (int) session.getAttribute("managerid");
+		RIMRService.getRIMRService().ResolveRIMR(rimr_id, decision, date_resolved, manager_id );
+		return ViewAllResolvedRIMR(req);
+	}
+
 	
 
 }

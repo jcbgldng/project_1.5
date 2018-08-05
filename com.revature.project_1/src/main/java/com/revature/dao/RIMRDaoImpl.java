@@ -211,6 +211,32 @@ public class RIMRDaoImpl implements RIMRDao{
 		return null;
 	}
 
+	public void ResolveRIMR(int rimr_id, String decision, Date date_resolved, int manager_id) {
+		Connection theConn = null;
+		try {
+			theConn = Jdbcconnection.getConnection();
+			
+			String sql = "call update_reimbursementrequest(?,?,?,?)";
+			CallableStatement cs = theConn.prepareCall(sql);
+			
+			cs.setInt(1, rimr_id);
+			cs.setString(2, decision);
+			cs.setDate(3, date_resolved);
+			cs.setInt(4, manager_id);
+			cs.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();		
+		}finally {
+			try {
+				theConn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+	}
+
 
 	
 

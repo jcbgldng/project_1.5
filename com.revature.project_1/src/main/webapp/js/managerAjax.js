@@ -67,7 +67,6 @@ function getAllPendingRIMR() {
 
 function getAllResolvedRIMR() {
 	let spot = document.getElementById("spot");
-
 	var xhr = new XMLHttpRequest();
 
 	xhr.onreadystatechange = function(){
@@ -78,4 +77,39 @@ function getAllResolvedRIMR() {
 	}
 	xhr.open("get", "/com.revature.project_1/getAllResolvedRIMR.ajax");
 	xhr.send();
+}
+function AppoveRIMR(id) {
+	let spot = document.getElementById("spot");
+	let data = "";
+	data = data.concat("RIMR_id=").concat(id.innerHTML);
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(){
+		if( (xhr.readyState === 4) & (xhr.status === 200) ){
+			spot.innerHTML = xhr.responseText;
+		}
+
+	}
+	xhr.open("post", "/com.revature.project_1/appoveRIMR.ajax", true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.send(data);
+}
+
+function RejectRIMR(id) {
+	let spot = document.getElementById("spot");
+	let data = "";
+	data = data.concat("RIMR_id=").concat(id.innerHTML);
+
+	var xhr = new XMLHttpRequest();
+
+	xhr.onreadystatechange = function(){
+		if( (xhr.readyState === 4) & (xhr.status === 200) ){
+			spot.innerHTML = xhr.responseText;
+		}
+
+	}
+	xhr.open("post", "/com.revature.project_1/rejectRIMR.ajax", true);
+	xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+	xhr.send(data);
 }

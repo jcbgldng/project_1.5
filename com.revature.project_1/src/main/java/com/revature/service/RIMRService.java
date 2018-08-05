@@ -47,4 +47,9 @@ public class RIMRService {
 		return RIMRDaoImpl.getRIMRDAO().viewAllResolvedRIMR();
 	}
 
+	public void ResolveRIMR(int rimr_id, String decision, Date date_resolved, int manager_id) {
+		RIMRDaoImpl.getRIMRDAO().ResolveRIMR(rimr_id, decision, date_resolved, manager_id);
+		
+	}
+
 }
