@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.revature.connection.Jdbcconnection;
 import com.revature.model.Employee;
 
@@ -55,12 +57,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			if(password.equals(possibleEmployee.getPassword()))
 				return possibleEmployee;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log(e);
 		} finally {
 			try {
 				theConn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log(e);
 			}
 		}
 		return null;
@@ -95,12 +97,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			log(e);
 		} finally {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log(e);
 			}
 		}
 		return null;
@@ -145,15 +147,19 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			}
 			return possibleEmployee;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log(e);
 		}finally {
 			try {
 				theConn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log(e);
 			}
 		}
 		return null;
 	}
+	public static void log(Throwable e) {
+        final Logger log = Logger.getLogger(EmployeeDaoImpl.class);
+        log.error(e);
+    }
 
 }

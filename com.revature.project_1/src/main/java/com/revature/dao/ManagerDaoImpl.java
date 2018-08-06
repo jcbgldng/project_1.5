@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import com.revature.connection.Jdbcconnection;
 import com.revature.model.Manager;
 
@@ -50,7 +52,7 @@ public class ManagerDaoImpl implements ManagerDao{
 			if(password.equals(possibleManager.getPassword()))
 				return possibleManager;
 		} catch (Exception e) {
-			e.printStackTrace();
+			log(e);
 		} finally {
 			try {
 				theConn.close();
@@ -60,5 +62,9 @@ public class ManagerDaoImpl implements ManagerDao{
 		}
 		return null;
 	}
-
+	
+	public static void log(Throwable e) {
+        final Logger log = Logger.getLogger(ManagerDaoImpl.class);
+        log.error(e);
+    }
 }
