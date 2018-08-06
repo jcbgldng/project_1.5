@@ -1,6 +1,6 @@
 window.onload = function(){
 	loggedIn();
-	document.getElementById("theName").addEventListener("click", printFirstandLast);
+	//document.getElementById("theName").addEventListener("click", printFirstandLast);
 	document.getElementById("viewEmployees").addEventListener("click", viewEmployees);
 	document.getElementById("AllPendingRIMR").addEventListener("click", getAllPendingRIMR);
 	document.getElementById("AllResolvedRIMR").addEventListener("click", getAllResolvedRIMR);
@@ -19,7 +19,7 @@ function loggedIn(){
 
 }
 
-function printFirstandLast(){
+/*function printFirstandLast(){
 	let spot = document.getElementById("spot");
 
 	var xhr = new XMLHttpRequest();
@@ -34,7 +34,7 @@ function printFirstandLast(){
 	xhr.send();
 
 }
-
+*/
 function viewEmployees(){
 	let spot = document.getElementById("spot");
 

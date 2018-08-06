@@ -2,3 +2,16 @@ body {
   background-color: lightblue;
   color: rgb(60,179,113);
 }
+.form-group{
+	padding: 50px;
+}
+th {
+    background-color: #4CAF50;
+    color: white;
+    text-align: center;
+}
+td {
+	padding: 15px;
+    height: 50px;
+    vertical-align: bottom;
+}
