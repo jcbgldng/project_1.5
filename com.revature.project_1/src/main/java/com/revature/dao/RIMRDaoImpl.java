@@ -12,6 +12,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
+
 import com.revature.connection.Jdbcconnection;
 import com.revature.model.RIMR;
 
@@ -42,12 +44,12 @@ public class RIMRDaoImpl implements RIMRDao{
 			cs.executeUpdate();
 			
 		} catch (Exception e) {
-			e.printStackTrace();		
+			log(e);		
 		}finally {
 			try {
 				theConn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log(e);
 			}
 		}
 		
@@ -82,12 +84,15 @@ public class RIMRDaoImpl implements RIMRDao{
 			return requests;
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-		}try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			log(e);
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				log(e);
+			}
 		}
+		
 		return null;
 		
 	}
@@ -122,12 +127,15 @@ public class RIMRDaoImpl implements RIMRDao{
 			return requests;
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-		}try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			log(e);
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				log(e);
+			}
 		}
+		
 		return null;
 	}
 
@@ -164,11 +172,13 @@ public class RIMRDaoImpl implements RIMRDao{
 			return requests;
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-		}try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			log(e);
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				log(e);
+			}
 		}
 		return null;
 	}
@@ -202,11 +212,13 @@ public class RIMRDaoImpl implements RIMRDao{
 			return requests;
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-		}try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			log(e);
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				log(e);
+			}
 		}
 		return null;
 	}
@@ -226,12 +238,12 @@ public class RIMRDaoImpl implements RIMRDao{
 			cs.executeUpdate();
 			
 		} catch (Exception e) {
-			e.printStackTrace();		
+			log(e);		
 		}finally {
 			try {
 				theConn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				log(e);
 			}
 		}
 		
@@ -266,16 +278,20 @@ public class RIMRDaoImpl implements RIMRDao{
 			return requests;
 			
 		} catch (Exception e) {
-			e.printStackTrace();
-		}try {
-			conn.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+			log(e);
+		}finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				log(e);
+			}
 		}
 		return null;
 	}
-
-
 	
+	public static void log(Throwable e) {
+        final Logger log = Logger.getLogger(RIMRDaoImpl.class);
+        log.error(e);
+    }
 
 }

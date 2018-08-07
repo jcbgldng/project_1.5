@@ -6,6 +6,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Properties;
 
+import org.apache.log4j.Logger;
+
 public class Jdbcconnection {
 	
 	private Jdbcconnection() {}
@@ -28,15 +30,19 @@ public class Jdbcconnection {
 			return conn;
 		} 
 		catch (Exception e) {
-			e.printStackTrace();
+			log(e);
 		}finally {
 			try {
 				in.close();
 			} catch (Exception e2) {
-				
+				log(e2);
 			}
 		}
 		return null;
 	}
+	public static void log(Throwable e) {
+        final Logger log = Logger.getLogger(Jdbcconnection.class);
+        log.error(e);
+    }
 
 }

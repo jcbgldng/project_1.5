@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * Servlet implementation class log_in
@@ -25,7 +27,8 @@ public class MasterServlet extends HttpServlet {
     	try {
     		req.getRequestDispatcher(RequestHelper.process(req)).forward(req, resp);
 		} catch (Exception e) {
-			//Employee or manager logged in fine
+			//logged in
+			log(e);
 		} 
 	}
     
@@ -35,7 +38,12 @@ public class MasterServlet extends HttpServlet {
     		req.getRequestDispatcher(RequestHelper.process(req)).forward(req,resp);
 		} catch (Exception e) {
 			// Employee or manager logged in fine
+			log(e);
 		} 
+    }
+    public static void log(Throwable e) {
+        final Logger log = Logger.getLogger(MasterServlet.class);
+        log.error(e);
     }
 
 }
